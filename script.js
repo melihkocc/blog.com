@@ -28,6 +28,13 @@ app.set("view engine","pug");
 app.set("views","./views")
 /// pug kurulum END
 
+/// Router tanımlama START
+const pageRouter = require("./routes/page")
+const accountRouter = require("./routes/account")
+const categoryRouter = require("./routes/category")
+const blogRouter = require("./routes/blog")
+/// Router tanımlama END
+
 /// public dosyaları dahil et
 app.use(express.static(path.join(__dirname  ,"public")));
 app.use(bodyParser.urlencoded({extended:false}));
@@ -72,15 +79,6 @@ app.use(async (req, res, next) => {
 
 
 const sendAuthentication = require("./middlewares/sendAuthentication")
-const isAdmin = require("./middlewares/isAdmin")
-const authenticationEngelleme = require("./middlewares/authenticationEngelleme")
-
-/// Router tanımlama START
-const pageRouter = require("./routes/page")
-const accountRouter = require("./routes/account")
-const categoryRouter = require("./routes/category")
-const blogRouter = require("./routes/blog")
-/// Router tanımlama END
 
 app.use("/",sendAuthentication,pageRouter)
 app.use("/",sendAuthentication,accountRouter)
@@ -91,7 +89,7 @@ app.use("/",errorController.get404)
 
 const port = process.env.PORT || 3000;
 
-mongoose.connect(`mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@cluster0.b1laklu.mongodb.net/`)
+mongoose.connect(`mongodb+srv://${databaseUser}:${databasePassword}@cluster0.b1laklu.mongodb.net/`)
     .then(()=>{
         console.log("Connected")
         app.listen(port)
