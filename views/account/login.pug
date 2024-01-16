@@ -1,0 +1,25 @@
+extends ../layouts/main-layout.pug
+block title 
+    title Giriş Yap 
+
+block content 
+    h1.text-center Giriş Yap
+    section.about-us
+        .container
+            .row
+                .col-lg-12 
+                    if errorMessage 
+                        .alert.alert-danger #{errorMessage}
+                .col-lg-12
+                    form(method="POST",action="/login")
+                        .mb-3
+                            label(for="email", class="form-label d-flex justify-content-start") Email
+                            input(type="email", class="form-control", name="email" ,id="email")
+                        .mb-3
+                            label(for="password", class="form-label d-flex justify-content-start") Password
+                            input(type="password", class="form-control", name="password" ,id="password")
+                        .mb-3.d-flex.justify-content-between.align-items-center
+                            button(type="submit", class="btn btn-primary") Giriş Yap    
+                            a(href="/register").text-decoration-none Kayıt Ol 
+
+

@@ -1,0 +1,20 @@
+extends ../layouts/main-layout.pug
+block title 
+    title Kategoriler 
+
+block content 
+    h1.text-center.m-3 Kategoriler
+    table.table
+        thead
+            tr
+                th(scope="col") ID
+                th(scope="col") Name
+                th(scope="col") Edit 
+                th(scope="col") Delete 
+        tbody
+            each category in categories
+                tr
+                    th(scope="row") #
+                    td #{category.name}
+                    td: a(href=`/edit-category/${category._id}`): button.btn.btn-primary Düzenle 
+                    td: a(href="/"): button.btn.btn-danger Sil 

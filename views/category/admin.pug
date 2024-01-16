@@ -1,0 +1,11 @@
+extends ../layouts/main-layout.pug
+block title 
+    title Admin 
+
+block content 
+    h1.text-center Admin
+    ul.list-group
+        a(href="/categories"): li.list-group-item Kategoriler
+        a(href="/add-category"): li.list-group-item Kategori Ekle
+        a(href="/messages"): li.list-group-item Gönderilen Mesajlar
+

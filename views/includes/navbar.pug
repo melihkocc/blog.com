@@ -1,0 +1,41 @@
+body
+  #preloader
+    .jumper
+      div
+      div
+      div
+
+  header
+    nav.navbar.navbar-expand-lg
+      .container
+        a.navbar-brand(href="index.html")
+          h2 Stand Blog
+            em.
+        button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive", aria-expanded="false", aria-label="Toggle navigation")
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse(id="navbarResponsive")
+          ul.navbar-nav.ml-auto
+            li.nav-item
+              a.nav-link(href="/",class=`${path == "index" ? "active" : ""}`) Anasayfa
+            li.nav-item
+              a.nav-link(href="/about",class=`${path == "about" ? "active" : ""}`) Hakkımızda
+            li.nav-item
+              a.nav-link(href="/contact",class=`${path == "contact" ? "active" : ""}`) İletişim
+
+            if isAdmin 
+              li.nav-item
+                a.nav-link(href="/admin",class=`${path == "admin" ? "active" : ""}`) Admin              
+            if isAuthenticated 
+              li.nav-item
+                a.nav-link(href="/followings-user-blogs",class=`${path == "followingsBlog" ? "active" : ""}`) Followings Blog
+              li.nav-item
+                a.nav-link(href="/my-likes-blogs",class=`${path == "myLikesBlog" ? "active" : ""}`) Likes Blogs
+              li.nav-item
+                a.nav-link(href="/dashboard",class=`${path == "dashboard" ? "active" : ""}`) Profile
+              li.nav-item
+                a.nav-link(href="/logout") Çıkış Yap        
+            else 
+              li.nav-item
+                a.nav-link(href="/login",class=`${path == "login" ? "active" : ""}`) Giriş Yap
+              li.nav-item
+                a.nav-link(href="/register",class=`${path == "register" ? "active" : ""}`) Kayıt Ol

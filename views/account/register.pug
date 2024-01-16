@@ -1,0 +1,30 @@
+extends ../layouts/main-layout.pug
+block title 
+    title Kayıt Ol 
+
+block content 
+    h1.text-center.mt-2 Kayıt Ol
+    section.about-us
+        .container
+            .row
+                .col-lg-12 
+                    if errorMessage 
+                        .alert.alert-danger #{errorMessage}
+                .col-lg-12
+                    form(method="POST",action="/register").border.border-1.p-4
+                        .mb-3
+                            label(for="name", class="form-label d-flex justify-content-start") Name
+                            input(type="text", class="form-control", name="name" ,id="name")
+                        .mb-3
+                            label(for="lastName", class="form-label d-flex justify-content-start") Last Name
+                            input(type="text", class="form-control", name="lastName" ,id="lastName")
+                        .mb-3
+                            label(for="email", class="form-label d-flex justify-content-start") Email
+                            input(type="email", class="form-control", name="email" ,id="email")
+                        .mb-3
+                            label(for="password", class="form-label d-flex justify-content-start") Password
+                            input(type="password", class="form-control", name="password" ,id="password")
+                        .mb-3    
+                            button(type="submit", class="btn btn-primary") Kayıt Ol
+
+

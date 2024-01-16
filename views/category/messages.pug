@@ -1,0 +1,20 @@
+extends ../layouts/main-layout.pug
+block title 
+    title Kategoriler 
+
+block content 
+    h1.text-center.m-3 Kategoriler
+    table.table
+        thead
+            tr
+                th(scope="col") Ad
+                th(scope="col") Soyad
+                th(scope="col") Email 
+                th(scope="col") Messages 
+        tbody
+            each message in messages
+                tr
+                    td #{message.name}
+                    td #{message.lastName}
+                    td #{message.email}
+                    td #{message.message} 

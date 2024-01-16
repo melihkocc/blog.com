@@ -1,0 +1,33 @@
+{
+  "name": "blog.com",
+  "version": "1.0.0",
+  "description": "Blog Page",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Blog"
+  ],
+  "author": "Melih Koç",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cloudinary": "^1.41.2",
+    "connect-mongodb-session": "^3.1.1",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.3",
+    "express-session": "^1.17.3",
+    "mongoose": "^8.0.4",
+    "nodemailer": "^6.9.8",
+    "pug": "^3.0.2",
+    "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

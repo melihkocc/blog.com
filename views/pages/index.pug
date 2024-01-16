@@ -1,0 +1,126 @@
+extends ../layouts/main-layout.pug
+block title 
+    title Anasayfa 
+
+block content 
+    h1.text-dark Anasayfa
+    h2 #{giris}
+
+    .main-banner.header-text
+        .container-fluid
+            .owl-banner.owl-carousel
+                each carouselBlog in carouselBlogs
+                    .item
+                        img(src=`${carouselBlog.url}`, alt=`${carouselBlog.name}`)
+                        .item-content
+                            .main-content
+                                .meta-category
+                                    span Fashion
+                                    a(href=`/blog/${carouselBlog._id}`)
+                                        h4 #{carouselBlog.name}
+                                    ul.post-info
+                                        li
+                                            a(href=`/user/${carouselBlog.user._id}`) #{carouselBlog.user.name} #{carouselBlog.user.lastName}
+                                        li
+                                            a(href=`/blog/${carouselBlog._id}`)
+                                                | #{carouselBlog.date.toLocaleString().substring(0, 16)}
+                                        li
+                                            a(href=`/blog/${carouselBlog._id}`) #{carouselBlog.comments.length} Yorum
+    
+    .call-to-action
+        .container
+            .row
+                .col-lg-12
+                    .main-content
+                        .row
+                            .col-lg-8
+                                span Stand Blog HTML5 Template
+                                h4 Creative HTML Template For Bloggers!
+                            .col-lg-4
+                                .main-button
+                                    a(rel="nofollow", href="https://templatemo.com/tm-551-stand-blog", target="_parent") Download Now!
+    section.blog-posts
+        .container
+            .row
+                .col-lg-8
+                    .all-blog-posts
+                        .row
+                            each blog in blogs
+                                    .col-lg-12
+                                        .blog-post
+                                            .blog-thumb
+                                                img(src=`${blog.url}`, alt="")
+                                            .down-content
+                                                span Lifestyle
+                                                a(href=`/blog/${blog._id}`)
+                                                    h4 #{blog.name}
+                                                ul.post-info
+                                                    li
+                                                        a(href=`/user/${blog.user._id}`) #{blog.user.name} #{blog.user.lastName}                                                        
+                                                    li
+                                                        a(href=`/blog/${blog._id}`) 
+                                                            | #{blog.date.toLocaleString().substring(0, 16)}
+                                                    li
+                                                        a(href=`/blog/${blog._id}`) #{blog.comments.length} Yorum
+                                                p.w-100
+                                                    | #{blog.content.substring(0, 50).replace(/<\/?[^>]+(>|$)/g, '') + '...'}
+                                                .post-options
+                                                    .row
+                                                        .col-6
+                                                            ul.post-tags
+                                                                li
+                                                                    i.fa.fa-tags
+                                                                each category in blog.categories 
+                                                                    li.d-block
+                                                                        a(href=`/category/${category._id}`) #{category.name}
+                                                        .col-6
+                                                            ul.post-share
+                                                                li
+                                                                    i.fa.fa-share-alt
+                                                                li
+                                                                    a(href="#") Facebook,
+                                                                li
+                                                                    a(href="#") Twitter
+
+
+
+                .col-lg-4
+                    .sidebar
+                        .row
+                            .col-lg-12
+                                .sidebar-item.search
+                                    form#search_form(name="gs", method="GET", action="#")
+                                    input.searchText(type="text", name="q", placeholder="type to search...", autocomplete="on")
+                            .col-lg-12
+                                .sidebar-item.recent-posts
+                                    .sidebar-heading
+                                        h2 Recent Posts
+                                    .content
+                                        ul
+                                            each recentBlog in recentBlogs
+                                                li
+                                                    a(href=`/blog/${recentBlog._id}`)
+                                                        h5 #{recentBlog.name}
+                                                        span #{recentBlog.date}
+                            .col-lg-12
+                                .sidebar-item.categories
+                                    .sidebar-heading
+                                        h2 Categories
+                                    .content
+                                        ul
+                                            each category in categories
+                                                li
+                                                    a(href=`/category/${category._id}`) #{category.name}
+                                .col-lg-12
+                                    .sidebar-item.tags
+                                        .sidebar-heading
+                                            h2 En Çok Beğenilenler
+                                        .content
+                                            ul
+                                                each mostLikeBlog in mostLikesBlogs
+                                                    li
+                                                        a(href=`/blog/${mostLikeBlog._id}`)
+                                                            h5 #{mostLikeBlog.name}
+                                                            span #{mostLikeBlog.date}
+                                                            span.d-block #{mostLikeBlog.likeSayisi} Beğenme
+

@@ -1,0 +1,104 @@
+extends ../layouts/main-layout.pug
+block title 
+    title Takip Ettiklerim 
+
+block content 
+    h1.text-center.m-3 Takip Ettiklerim
+
+    div.heading-page.header-text
+        section.page-heading
+            .container
+                .row
+                    .col-lg-12
+                        .text-content
+                            h2 Takip Ettiklerim
+    
+    section.call-to-action
+        .container
+            .row
+                .col-lg-12
+                    .main-content
+                        .row
+                            .col-lg-8
+                                span Stand Blog HTML5 Template
+                                h4 Creative HTML Template For Bloggers!
+                            .col-lg-4
+                                .main-button
+                                    a(href="https://templatemo.com/tm-551-stand-blog", target="_parent") Download Now!
+
+    section.blog-posts.grid-system
+        .container
+            .row
+                .col-lg-8
+                    .all-blog-posts
+                        .row
+                            if user.takipEdilen.length == 0
+                                h1 Takipçi No
+                            else
+                                each takipEdilen in user.takipEdilen
+                                    .col-md-4.col-sm-12 
+                                        .card(style="width: %100;")
+                                            a(href=`/user/${takipEdilen._id}`): img.card-img-top(src=`${takipEdilen.url}`, alt=`${takipEdilen.name}`)
+                                            .card-body
+                                                a(href=`/user/${takipEdilen._id}`): h5.card-title #{takipEdilen.name} #{takipEdilen.lastName}
+                                                a(href=`/user/${takipEdilen._id}`) #{takipEdilen.email}
+                                                .d-flex.justify-content-around.align-items-center.mt-4 
+                                                    a.btn.btn-primary(href=`/user/followers/${takipEdilen._id}`) Takipçi : #{takipEdilen.takipci.length}
+                                                    a.btn.btn-primary(href=`/user/followings/${takipEdilen._id}`) Takip Edilen : #{takipEdilen.takipEdilen.length}
+
+                                
+                                .col-lg-12
+                                    ul.page-numbers
+                                        li
+                                            a(href="#") 1
+                                        li.active
+                                            a(href="#") 2
+                                        li
+                                            a(href="#") 3
+                                        li
+                                            a(href="#")
+                                                i.fa.fa-angle-double-right
+
+                .col-lg-4
+                    .sidebar
+                        .row
+                            .col-lg-12
+                                .sidebar-item.search
+                                    form#search_form(name="gs", method="GET", action="#")
+                                        input.searchText(type="text", name="q", placeholder="type to search...", autocomplete="on")
+                            .col-lg-12
+                                .sidebar-item.recent-posts
+                                    .sidebar-heading
+                                        h2 Recent Posts
+                                    .content
+                                        ul
+                                            each recentBlog in recentBlogs
+                                                li
+                                                    a(href=`/blog/${recentBlog._id}`)
+                                                        h5 #{recentBlog.name}
+                                                        span 
+                                                            | #{recentBlog.date.toLocaleString().substring(0, 16)}
+                            
+                            .col-lg-12
+                                .sidebar-item.categories
+                                    .sidebar-heading
+                                        h2 Categories
+                                    .content
+                                        ul
+                                            each category in categories
+                                                li
+                                                    a(href=`/category/${category._id}`) #{category.name}
+            
+                            .col-lg-12
+                                .sidebar-item.tags
+                                    .sidebar-heading
+                                            h2 En Çok Beğenilenler
+                                    .content
+                                        ul
+                                            each mostLikeBlog in mostLikesBlogs
+                                                li
+                                                    a(href=`/blog/${mostLikeBlog._id}`)
+                                                        h5 #{mostLikeBlog.name}
+                                                        span 
+                                                            | #{mostLikeBlog.date.toLocaleString().substring(0, 16)} 
+                                                        span.d-block #{mostLikeBlog.likeSayisi} Beğenme

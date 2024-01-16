@@ -1,0 +1,60 @@
+extends ../layouts/main-layout.pug
+block title 
+    title Profile | #{user.name} 
+
+block content 
+    h1.text-center.mb-5 Profil
+    .container 
+        .row 
+            .col-sm-12 
+                .card.mx-auto(style="width: 50%;")
+                    img.card-img-top.w-50.rounded-circle.mx-auto.p-3(src=`${user.url}`, alt=`user.name`)
+                    .card-body.text-center  
+                        h5.card-title #{user.name} #{user.lastName}
+                        p.card-text #{user.email}
+                        p.btn.btn-primary  #{user.date}
+                        if isFollowedByUser
+                            a(href=`/unfollow/${user._id}`).btn.btn-light.d-block.mt-3.w-50.mx-auto Takipten Çıkar
+                        else 
+                            a(href=`/follow/${user._id}`).btn.btn-dark.d-block.mt-3.w-50.mx-auto Takip Et
+                        .d-flex.justify-content-around.align-items-center.mt-3
+                            a(href=`/user/followers/${user._id}`): button.btn.btn-primary Takipçi : #{user.takipci.length}
+                            a(href=`/user/followings/${user._id}`): button.btn.btn-primary Takip Edilen : #{user.takipEdilen.length}
+
+    h1.text-center.mb-4.mt-5 #{user.name}'in Blog Yazıları
+    .blog-posts.grid-system
+        .container.mt-5
+            .row 
+                each blog in blogs 
+                    .col-md-4.col-sm-12  
+                        .blog-post
+                            .blog-thumb
+                                img(src=`${blog.url}`, alt="")
+                            .down-content
+                                span LifeStyle
+                                a(href=`/blog/${blog._id}`)
+                                    h4 #{blog.name}
+                                ul.post-info
+                                    li
+                                        a(href="#") #{user.name}
+                                    li
+                                        a(href="#")
+                                            | #{blog.date.toLocaleString().substring(0, 16)}
+                                    li
+                                        a(href="#") #{blog.comments.length} Yorum
+                                p 
+                                    | #{blog.content.substring(0, 50).replace(/<\/?[^>]+(>|$)/g, '') + '...'}
+                                .post-options.mt-3
+                                    .row
+                                        .col-6
+                                            ul.post-tags
+                                                li
+                                                    i.fa.fa-tags
+                                                each category in blog.categories 
+                                                    li
+                                                        a(href=`/category/${category._id}`) #{category.name}
+
+
+
+
+

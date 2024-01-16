@@ -1,0 +1,131 @@
+extends ../layouts/main-layout.pug
+block title 
+    title #{blog.name}
+
+block content 
+    .heading-page.header-text
+        section.page-heading
+            .container
+                .row
+                    .col-lg-12
+                        .text-content
+                            h4 Post Details
+                            h2 #{blog.name}
+
+    section.blog-posts.grid-system
+        .container
+            .row
+                .col-lg-8
+                    .all-blog-posts
+                        .row
+                            .col-lg-12
+                                .blog-post
+                                    .blog-thumb
+                                        img(src=`${blog.url}`, alt=`${blog.name}`)
+                                    .down-content
+                                        span Lifestyle
+                                        a(href=`/blog/${blog._id}`)
+                                            h4 #{blog.name}
+                                        ul.post-info
+                                            li
+                                                a(href=`/user/${blog.user._id}`) #{blog.user.name} #{blog.user.lastName}
+                                            li
+                                                a(href=`/blog/${blog._id}`)
+                                                    | #{blog.date.toLocaleString().substring(0, 16)}
+                                            li
+                                                a(href=`/blog/${blog._id}`) #{blog.comments.length} Yorum
+                                        p. 
+                                            #{blog.content}
+                                        .post-options
+                                            .row
+                                                .col-6
+                                                    ul.post-tags
+                                                        li
+                                                            i.fa.fa-tags
+                                                        each category in blog.categories
+                                                            li.d-block
+                                                                a(href=`/category/${category._id}`) #{category.name}
+                                                .col-6
+                                                    ul.post-share
+                                                        li 
+                                                            if isLikedByUser
+                                                                a.me-5(href=`/remove-like-blog/${blog._id}`): i.fa-solid.fa-heart.text-danger
+                                                                span #{blog.likeSayisi} Beğenme
+                                                            else 
+                                                                a.me-5(href=`/like-blog/${blog._id}`): i.fa-regular.fa-heart.text-danger
+                                                                span #{blog.likeSayisi} Beğenme
+                            .col-lg-12
+                                .sidebar-item.comments
+                                    .sidebar-heading
+                                        h2 4 comments
+                                    .content
+                                        ul
+                                            each comment in comments
+                                                li.w-100
+                                                    .author-thumb
+                                                        a(href=`/user/${comment.user._id}`): img(src=`${comment.user.url}`, alt="")
+                                                    .right-content
+                                                        a(href=`/user/${comment.user._id}`): h4 #{comment.user.name}
+                                                            span #{comment.date}
+                                                        p #{comment.message}
+                    
+                            .col-lg-12
+                                .sidebar-item.submit-comment
+                                    .sidebar-heading
+                                        h2 Your comment
+                                    .content
+                                        form#comment(action="/send-message" method="POST")
+                                            .row
+                                                input(type="hidden",name="blogid",value=`${blog._id}`)
+                                                .col-lg-12
+                                                    fieldset
+                                                        textarea(name="message" rows="6" id="message" placeholder="Type your comment" required)
+                                                .col-lg-12
+                                                    fieldset
+                                                        button(type="submit" id="form-submit" class="main-button") Gönder
+                .col-lg-4
+                    .sidebar
+                        .row
+                            .col-lg-12
+                                .sidebar-item.search
+                                    form#search_form(name="gs" method="GET" action="#")
+                                        input(type="text" name="q" class="searchText" placeholder="type to search..." autocomplete="on")
+                            .col-lg-12
+                                .sidebar-item.recent-posts
+                                    .sidebar-heading
+                                        h2 Recent Posts
+                                    .content
+                                        ul
+                                            each recentBlog in recentBlogs
+                                                li
+                                                    a(href=`/blog/${recentBlog._id}`)
+                                                        h5 #{recentBlog.name}
+                                                        span #{recentBlog.date}
+                                                            | #{recentBlog.date.toLocaleString().substring(0, 16)}
+                            .col-lg-12
+                                .sidebar-item.categories
+                                    .sidebar-heading
+                                        h2 Categories
+                                    .content
+                                        ul
+                                            each category in categories
+                                                li
+                                                    a(href=`/category/${category._id}`) #{category.name}
+
+                            
+                            .col-lg-12
+                                .sidebar-item.tags
+                                    .sidebar-heading
+                                            h2 En Çok Beğenilenler
+                                    .content
+                                        ul
+                                            each mostLikeBlog in mostLikesBlogs
+                                                li
+                                                    a(href=`/blog/${mostLikeBlog._id}`)
+                                                        h5 #{mostLikeBlog.name}
+                                                        span
+                                                            | #{mostLikeBlog.date.toLocaleString().substring(0, 16)}
+                                                        span.d-block #{mostLikeBlog.likeSayisi} Beğenme
+
+
+

@@ -1,0 +1,33 @@
+extends ../layouts/main-layout.pug
+block title 
+    title İletişim 
+
+block content 
+    h1.text-center İletişim
+    section.about-us
+        .container
+            .row
+                .col-lg-12 
+                    if errorMessage 
+                        .alert.alert-danger #{errorMessage}
+                .col-lg-12 
+                    if basarili 
+                        .alert.alert-success #{basarili}
+                .col-lg-12
+                    form(method="POST",action="/contact")
+                        .mb-3
+                            label(for="name", class="form-label d-flex justify-content-start") Ad
+                            input(type="text", class="form-control", name="name" ,id="name")
+                        .mb-3
+                            label(for="lastName", class="form-label d-flex justify-content-start") Soyad
+                            input(type="text", class="form-control", name="lastName" ,id="lastName")
+                        .mb-3
+                            label(for="email", class="form-label d-flex justify-content-start") Email
+                            input(type="email", class="form-control", name="email" ,id="email")
+                        .mb-3
+                            label(for="message", class="form-label d-flex justify-content-start") Mesaj
+                            textarea(class="form-control" ,placeholder="Mesaj" ,id="message" ,name="message")
+                        .mb-3.d-flex.justify-content-between.align-items-center
+                            button(type="submit", class="btn btn-primary") Gönder    
+
+

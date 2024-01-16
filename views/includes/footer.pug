@@ -1,0 +1,39 @@
+footer
+  .container
+    .row
+      .col-lg-12
+        ul.social-icons
+          li
+            a(href="#") Facebook
+          li
+            a(href="#") Twitter
+          li
+            a(href="#") Behance
+          li
+            a(href="#") Linkedin
+          li
+            a(href="#") Dribbble
+
+      .col-lg-12
+        .copyright-text
+          p Copyright 2020 Stand Blog Co. | Design: 
+            a(rel="nofollow", href="https://templatemo.com", target="_parent") TemplateMo
+
+script(src="/jquery/jquery.min.js")
+script(src="/bootstrap/js/bootstrap.bundle.min.js")
+
+script(src="/js/custom.js")
+script(src="/js/owl.js")
+script(src="/js/slick.js")
+script(src="/js/isotope.js")
+script(src="/js/accordions.js")
+
+script.
+  cleared = [0, 0, 0];
+  function clearField(t) { 
+    if (!cleared[t.id]) { 
+      cleared[t.id] = 1; 
+      t.value=''; 
+      t.style.color='#fff';
+    }
+  }

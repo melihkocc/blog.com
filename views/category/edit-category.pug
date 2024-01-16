@@ -1,0 +1,22 @@
+extends ../layouts/main-layout.pug
+block title 
+    title Kategori Düzenle 
+
+block content 
+    h1.text-center Kategori Düzenle
+    section.about-us
+        .container
+            .row
+                .col-lg-12 
+                    if errorMessage 
+                        .alert.alert-danger #{errorMessage}
+                .col-lg-12
+                    form(method="POST",action="/edit-category")
+                        input(type="hidden",name="id",value=`${category._id}`)
+                        .mb-3
+                            label(for="name", class="form-label d-flex justify-content-start") İsim
+                            input(type="text", class="form-control", name="name" ,id="name",value=`${category.name}`)
+                        .mb-3.d-flex.justify-content-between.align-items-center
+                            button(type="submit", class="btn btn-primary") Kaydet    
+
+
