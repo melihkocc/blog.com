@@ -1,8 +1,3 @@
-/// DOTENV CONFİG START
-const dotenv = require("dotenv")
-dotenv.config();
-/// DOTENV CONFİG END
-
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
@@ -13,6 +8,11 @@ const mongodbStore = require("connect-mongodb-session")(session);
 const User = require("./models/user");
 const cloudinary = require("cloudinary").v2;
 const fileUpload = require("express-fileupload");
+/// DOTENV CONFİG START
+const dotenv = require("dotenv")
+dotenv.config();
+/// DOTENV CONFİG END
+
 
 const databaseUser = process.env.DATABASE_USER;
 const databasePassword = process.env.DATABASE_PASSWORD;
