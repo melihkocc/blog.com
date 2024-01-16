@@ -83,11 +83,14 @@ const blogRouter = require("./routes/blog")
 /// Router tanımlama END
 
 app.use("/",sendAuthentication,pageRouter)
-app.use(sendAuthentication,accountRouter)
-app.use(sendAuthentication,categoryRouter)
-app.use(sendAuthentication,blogRouter)
+app.use("/",sendAuthentication,accountRouter)
+app.use("/",sendAuthentication,categoryRouter)
+app.use("/",sendAuthentication,blogRouter)
+const errorController = require("./controllers/error")
+app.use("/",errorController.get404)
 
 const port = process.env.PORT || 3000;
+
 mongoose.connect(`mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@cluster0.b1laklu.mongodb.net/`)
     .then(()=>{
         console.log("Connected")
