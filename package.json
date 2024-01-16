@@ -6,9 +6,6 @@
   "scripts": {
     "start": "node script.js"
   },
-  "keywords": [
-    "Blog"
-  ],
   "author": "Melih Koç",
   "license": "ISC",
   "dependencies": {
