@@ -13,7 +13,8 @@ const dotenv = require("dotenv")
 dotenv.config();
 /// DOTENV CONFİG END
 
-
+const databaseUser = process.env.DATABASE_USER;
+const databasePassword = process.env.DATABASE_PASSWORD;
 
 
 cloudinary.config({
@@ -87,8 +88,7 @@ const errorController = require("./controllers/error")
 app.use("/",errorController.get404)
 
 
-const databaseUser = process.env.DATABASE_USER;
-const databasePassword = process.env.DATABASE_PASSWORD;
+
 const port = process.env.PORT || 3000;
 
 mongoose.connect(`mongodb+srv://${databaseUser}:${databasePassword}@cluster0.b1laklu.mongodb.net/`)
